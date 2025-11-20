@@ -7,35 +7,3 @@ GET {{baseUrl}}/api/produits
 ### Get product by ID
 GET {{baseUrl}}/api/produits/1
 
-### Create a new product
-POST {{baseUrl}}/api/produits
-Content-Type: application/json
-
-{
-  "nom": "Laptop",
-  "prix": 999.99,
-  "quantite": 10
-}
-
-### Create another product
-POST {{baseUrl}}/api/produits
-Content-Type: application/json
-
-{
-  "nom": "Tablet",
-  "prix": 599.99,
-  "quantite": 5
-}
-
-### Update product with ID 1
-PUT {{baseUrl}}/api/produits/1
-Content-Type: application/json
-
-{
-  "nom": "Gaming Laptop",
-  "prix": 1499.99,
-  "quantite": 3
-}
-
-### Delete product with ID 2
-DELETE {{baseUrl}}/api/produits/2

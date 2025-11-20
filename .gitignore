@@ -36,3 +36,7 @@ build/
 .env
 .env.local
 .env.*.local
+
+### Test Files ###
+*.rest
+file.rest
