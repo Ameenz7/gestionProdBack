@@ -1,29 +1,49 @@
 package com.fedicode.gestionprodback.service;
 
-import com.fedicode.gestionprodback.entitie.Produit;
+import com.fedicode.gestionprodback.entity.Produit;
 import com.fedicode.gestionprodback.repository.ProduitRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
-public class ProduitService implements Iproduit {
-    @Autowired
-    ProduitRepository pr;
+@RequiredArgsConstructor
+public class ProduitService implements IProduitService {
+
+    private final ProduitRepository produitRepository;
+
     @Override
-    public List<Produit> getAllProduit() {
-        return  pr.findAll();
+    public List<Produit> getAllProduits() {
+        return produitRepository.findAll();
     }
 
     @Override
-    public void supprimerProd(Long id) {
-        pr.deleteById(id);
-
+    public Optional<Produit> getProduitById(Long id) {
+        return produitRepository.findById(id);
     }
 
     @Override
-    public void ajouterProd(Produit p) {
-        pr.save(p);
-
+    public Produit saveProduit(Produit produit) {
+        return produitRepository.save(produit);
     }
+
+    @Override
+    public void deleteProduit(Long id) {
+        produitRepository.deleteById(id);
+    }
+
+    @Override
+    public Produit updateProduit(Long id, Produit produit) {
+        return produitRepository.findById(id)
+                .map(existing -> {
+                    existing.setNom(produit.getNom());
+                    existing.setPrix(produit.getPrix());
+                    existing.setQuantite(produit.getQuantite());
+                    return produitRepository.save(existing);
+                })
+                .orElseThrow(() -> new RuntimeException("Produit not found with id: " + id));
+    }
+
 }

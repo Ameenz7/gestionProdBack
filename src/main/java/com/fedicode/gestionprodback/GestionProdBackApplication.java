@@ -1,6 +1,6 @@
 package com.fedicode.gestionprodback;
 
-import com.fedicode.gestionprodback.entitie.Produit;
+import com.fedicode.gestionprodback.entity.Produit;
 import com.fedicode.gestionprodback.repository.ProduitRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,26 +8,21 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-
 public class GestionProdBackApplication {
 
     public static void main(String[] args) {
-
         SpringApplication.run(GestionProdBackApplication.class, args);
-
-
     }
 
     @Bean
-    CommandLineRunner start(ProduitRepository pr){
+    CommandLineRunner start(ProduitRepository produitRepository) {
         return args -> {
-            pr.save(new Produit(null,"pc",1.10,3));
-            pr.save(Produit
-                    .builder()
-                            .id(null)
-                            .nom("tablette")
-                            .prix(1.5)
-                            .quantite(5)
+            produitRepository.save(new Produit(null, "PC", 1299.99, 3));
+            produitRepository.save(Produit.builder()
+                    .id(null)
+                    .nom("Tablette")
+                    .prix(599.99)
+                    .quantite(5)
                     .build());
         };
     }

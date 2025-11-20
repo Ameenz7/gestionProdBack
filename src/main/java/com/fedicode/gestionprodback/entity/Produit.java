@@ -1,9 +1,6 @@
-package com.fedicode.gestionprodback.entitie;
+package com.fedicode.gestionprodback.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -15,14 +12,11 @@ import lombok.*;
 @Builder
 public class Produit {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
     private Double prix;
     private int quantite;
-
 
 }
