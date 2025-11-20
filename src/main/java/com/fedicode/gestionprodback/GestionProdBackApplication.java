@@ -17,13 +17,16 @@ public class GestionProdBackApplication {
     @Bean
     CommandLineRunner start(ProduitRepository produitRepository) {
         return args -> {
-            produitRepository.save(new Produit(null, "PC", 1299.99, 3));
-            produitRepository.save(Produit.builder()
-                    .id(null)
-                    .nom("Tablette")
-                    .prix(599.99)
-                    .quantite(5)
-                    .build());
+            // Only add initial data if database is empty
+            if (produitRepository.count() == 0) {
+                produitRepository.save(new Produit(null, "PC", 1299.99, 3));
+                produitRepository.save(Produit.builder()
+                        .id(null)
+                        .nom("Tablette")
+                        .prix(599.99)
+                        .quantite(5)
+                        .build());
+            }
         };
     }
 
